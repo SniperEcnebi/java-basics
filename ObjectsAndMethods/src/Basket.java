@@ -1,8 +1,8 @@
 public class Basket {
-
     private static int count = 0;
     private String items = "";
     private int totalPrice = 0;
+    private double totalWeight = 0;
     private int limit;
 
     public Basket() {
@@ -23,15 +23,22 @@ public class Basket {
     }
 
     public static int getCount() {
+
         return count;
     }
 
     public static void increaseCount(int count) {
+
         Basket.count = Basket.count + count;
     }
 
     public void add(String name, int price) {
+        add(name, price,1 , 1);
+    }
+
+    public void add(String name, int price, int count, double weight){
         add(name, price, 1);
+        totalWeight = totalWeight + weight * count;
     }
 
     public void add(String name, int price, int count) {
@@ -50,20 +57,29 @@ public class Basket {
         }
 
         items = items + "\n" + name + " - " +
-            count + " шт. - " + price;
+                count + " шт. - " + price;
         totalPrice = totalPrice + count * price;
     }
+
 
     public void clear() {
         items = "";
         totalPrice = 0;
+        totalWeight = 0;
     }
 
-    public int getTotalPrice() {
+    public double getTotalPrice() {
+
         return totalPrice;
     }
 
+    public double getTotalWeight(){
+
+        return totalWeight;
+    }
+
     public boolean contains(String name) {
+
         return items.contains(name);
     }
 

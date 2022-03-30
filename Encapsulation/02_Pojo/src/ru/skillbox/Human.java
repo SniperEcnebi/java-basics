@@ -13,7 +13,7 @@ public class Human {
     }
 
     public static void main(String[] args) {
-        Human human = new Human("Amirkhan", 17);
+        Human human = new Human("Amirkhan", 16);
         System.out.println(human.getName());
         System.out.println(human.getAge());
         System.out.println(human.getHeight());

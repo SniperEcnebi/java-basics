@@ -4,7 +4,7 @@ public class Country {
 
     private String name;
     private int population = 329500000;
-    private double areaOfLand = 9834132.345;
+    private double areaOfLand = 9834132.3;
     private String capital = "Washington";
     private boolean seaAccess = true;
 

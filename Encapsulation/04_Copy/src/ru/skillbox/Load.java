@@ -1,22 +1,42 @@
 package ru.skillbox;
 public class Load {
 
-    private final LoadDetails load;
+    private final Dimensions dimensions;
+
+    private final int mass;
+    private final String address;
     private final boolean flip;
-    private final String  regNumber;
+    private final String regNumber;
     private final boolean breakable;
 
-    public Load(LoadDetails load, boolean flip, String regNumber, boolean breakable) {
+    public Load(Dimensions dimensions, int mass, String address, boolean flip, String regNumber, boolean breakable) {
+        this.dimensions = dimensions;
+        this.mass = mass;
+        this.address = address;
         this.flip = flip;
         this.regNumber = regNumber;
         this.breakable = breakable;
-        this.load = load;
+
     }
 
 
-    public LoadDetails getLoad() {
-        return load;
+    public Load setMass(int mass) {
+        return new Load(dimensions, mass,address,flip, regNumber, breakable);
     }
+
+    public Load setAddress(String address) {
+        return new Load(dimensions, mass,address,flip, regNumber, breakable);
+    }
+
+    public int getMass() {
+        return mass;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+
     public boolean isFlip() {
         return flip;
     }
@@ -30,9 +50,17 @@ public class Load {
     }
 
     public String toString() {
-        return load + "\n" + "can flip: " + flip + "\n" + "reg number: " +  regNumber + "\n" +
+        return  "Dimensions: "+ dimensions + "\n" +
+                "Mass: "  + mass + "\n" +
+                "Address: " + address +
+                "\n" + "can flip: " + flip + "\n" +
+                "reg number: " +  regNumber + "\n" +
                 "is breakable: " + breakable;
     }
+
 }
+
+
+
 
 

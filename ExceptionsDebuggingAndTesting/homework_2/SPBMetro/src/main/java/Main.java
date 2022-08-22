@@ -30,7 +30,7 @@ public class Main {
             printRoute(route);
 
             System.out.println("Длительность: " +
-                    RouteCalculator.calculateDuration(route) + " минут");
+                    RouteCalculator.calculateDuration(route) + "минут");
         }
     }
 

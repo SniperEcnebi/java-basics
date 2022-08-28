@@ -27,6 +27,7 @@ public class RouteCalculator {
         }
 
         route = getRouteWithTwoConnections(from, to);
+        System.out.println(route);
         return route;
     }
 

@@ -1,3 +1,4 @@
+import java.sql.SQLOutput;
 import java.util.Scanner;
 
 public class Main {
@@ -16,7 +17,7 @@ public class Main {
         while (true) {
             String command = scanner.nextLine();
             String[] tokens = command.split("\\s+", 2);
-
+        try {
             if (tokens[0].equals("add")) {
                 executor.addCustomer(tokens[1]);
             } else if (tokens[0].equals("list")) {
@@ -30,6 +31,10 @@ public class Main {
             } else {
                 System.out.println(COMMAND_ERROR);
             }
+        }
+        catch (Exception ex){
+            System.out.println(ex.getMessage());
+        }
         }
     }
 }

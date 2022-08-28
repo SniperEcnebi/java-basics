@@ -15,6 +15,15 @@ public class CustomerStorage {
         final int INDEX_PHONE = 3;
 
         String[] components = data.split("\\s+");
+        if (components.length > 4){
+            throw new IllegalArgumentException("Wrong format");
+        }
+        if (!components[INDEX_EMAIL].matches("[A-Za-z]+[0-9]?@[A-Za-z]+[0-9]?\\.{1}[A-Za-z]+[0-9]?")) {
+            throw new IllegalArgumentException("Wrong format");
+        }
+        if (!components[INDEX_PHONE].matches("[+][0-9]+")){
+            throw new IllegalArgumentException("Wrong format");
+        }
         String name = components[INDEX_NAME] + " " + components[INDEX_SURNAME];
         storage.put(name, new Customer(name, components[INDEX_PHONE], components[INDEX_EMAIL]));
     }

@@ -12,6 +12,9 @@ public class Test extends TestCase {
     StationIndex stationIndex;
     List<Station> route;
     List<Station> stations;
+    Line line1;
+    Line line2;
+    Line line3;
     Station station1;
     Station station2;
     Station station3;
@@ -23,11 +26,11 @@ public class Test extends TestCase {
         stationIndex = new StationIndex();
         route = new ArrayList<>();
         calculator = new RouteCalculator(stationIndex);
-        Line line1 = new Line(1, "first");
+        line1 = new Line(1, "first");
         stationIndex.addLine(line1);
-        Line line2 = new Line(2, "second");
+        line2 = new Line(2, "second");
         stationIndex.addLine(line2);
-        Line line3 = new Line(3,"third");
+        line3 = new Line(3,"third");
         stationIndex.addLine(line3);
         from = new Station("ecnebi", line1);
         stationIndex.addStation(from);
@@ -46,6 +49,8 @@ public class Test extends TestCase {
         stationIndex.addStation(to);
         route.add(to);
         stationIndex.addConnection(route);
+
+
 
 
 
@@ -124,23 +129,17 @@ public class Test extends TestCase {
     }
 
     public void testGetRouteWithTwoConnections(){
-
         List<Station> actual = new ArrayList<>();
         if (!stationIndex.getConnectedStations(from).contains(to)){
             actual = null;
         }
         else{
             actual = calculator.getShortestRoute(from,to);
-
         }
         List<Station> expected = route;
         assertEquals(expected, actual);
 
     }
-
-
-
-
 
 
     @Override

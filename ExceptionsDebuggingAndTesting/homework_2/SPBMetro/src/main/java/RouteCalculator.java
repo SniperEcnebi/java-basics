@@ -22,13 +22,18 @@ public class RouteCalculator {
         }
 
         route = getRouteWithOneConnection(from, to);
-        if (route != null) {
+        if (route.isEmpty()){
+            return null;
+        }
+        else if (route != null) {
             return route;
         }
 
         route = getRouteWithTwoConnections(from, to);
         System.out.println(route);
         return route;
+
+
     }
 
     public static double calculateDuration(List<Station> route) {

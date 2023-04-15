@@ -15,6 +15,17 @@
     <orderEntry type="library" name="Maven: org.json:json:20210307" level="project" />
     <orderEntry type="library" name="Maven: com.opencsv:opencsv:5.2" level="project" />
     <orderEntry type="library" name="Maven: com.google.code.gson:gson:2.8.0" level="project" />
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES />
+        <JAVADOC />
+        <SOURCES>
+          <root url="jar://$USER_HOME$/Desktop/jackson-core-jackson-core-2.15.0-rc2.zip!/jackson-core-jackson-core-2.15.0-rc2/src/main/java" />
+          <root url="jar://$USER_HOME$/Desktop/jackson-core-jackson-core-2.15.0-rc2.zip!/jackson-core-jackson-core-2.15.0-rc2/src/test/java" />
+        </SOURCES>
+      </library>
+    </orderEntry>
     <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-databind:2.13.3" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.commons:commons-lang3:3.12.0" level="project" />
   </component>
 </module>

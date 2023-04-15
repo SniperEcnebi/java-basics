@@ -17,6 +17,8 @@ import java.util.ArrayList;
 
 public class Main {
 
+    private static final String PATH_TO_CREATE_FILE = "C:/skillbox/java_basics/FilesAndNetwork/FilesAndNetwork/src/main/java";
+
     private static final String htmlLink = "FilesAndNetwork/data/code.html";
     static List<Lines> lines;
     static List<Stations> stations;
@@ -53,22 +55,30 @@ public class Main {
 
        JsonParser js = new JsonParser();
 
-       for (File i : fileListJson){
-           js.JsonPathandParse(String.valueOf(i));
 
+       for(File i : fileListJson){
+           js.JsonPathandParse(i.getAbsolutePath());
        }
+
+       JsonLinesWriter jsonLinesWriter = new JsonLinesWriter();
+       jsonLinesWriter.jlw("https://skillbox-java.github.io/");
+
 
 
        File temp = fileListCsv.get(0);
        fileListCsv.set(0, fileListCsv.get(1));
        fileListCsv.set(1, temp);
+       System.out.println("Parsed from Csv:");
        for(File i : fileListCsv){
-          CSVParser csv = new CSVParser(String.valueOf(i));
+          CSVParser csv = new CSVParser(i.getAbsolutePath());
           List<String[]> data = csv.readData();
           for (String[] row : data) {
               System.out.println(Arrays.toString(row));
+
           }
+
        }
+       
 
     }
 
@@ -105,6 +115,7 @@ public class Main {
         }
 
     }
+
 
 
 

@@ -1,14 +1,14 @@
 package core;
 
-
 public class Lines {
 
     private String number;
     private String name;
 
-    public Lines(String number, String name) {
-        this.number = number;
+    public Lines(String name, String number) {
         this.name = name;
+        this.number = number;
+
 
     }
 
@@ -20,8 +20,8 @@ public class Lines {
         return name;
     }
 
-    public String toString()
-    {
+    public String toString() {
         return name;
     }
+
 }

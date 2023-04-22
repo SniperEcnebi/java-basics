@@ -78,6 +78,15 @@ public class Main {
           }
 
        }
+
+       JsonAndCsvParser jsonAndCsvParser = new JsonAndCsvParser();
+       jsonAndCsvParser.recursiv(rootFile);
+
+       HtmlParser htmlParser = new HtmlParser("FilesAndNetwork/data/code.html");
+       htmlParser.getStationList();
+       htmlParser.getLineList();
+       htmlParser.createHasConnection();
+       htmlParser.writeToJson();
        
 
     }

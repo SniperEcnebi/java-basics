@@ -63,7 +63,6 @@ public class HtmlParser {
 
             });
             line.setListStation(stationList);
-            stationList.clear();
         });
     }
 

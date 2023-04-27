@@ -1,5 +1,5 @@
 
-import core.Lines;
+import core.Line;
 import core.Stations;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -12,7 +12,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 
-
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 
 public class Main {
@@ -20,7 +21,7 @@ public class Main {
     private static final String PATH_TO_CREATE_FILE = "C:/skillbox/java_basics/FilesAndNetwork/FilesAndNetwork/src/main/java";
 
     private static final String htmlLink = "FilesAndNetwork/data/code.html";
-    static List<Lines> lines;
+    static List<Line> lines;
     static List<Stations> stations;
     private static final String REGEX = "[0-9][0-9]?.";
 
@@ -40,13 +41,13 @@ public class Main {
 
 
 
-       String htmlLines = Parsing.parsefile(htmlLink);
+       String htmlLines = parsefile(htmlLink);
        Document doc = Jsoup.parse(htmlLines);
        Elements elementsL = doc.select("span.js-metro-line");
        Elements elementsS = doc.select("div.js-metro-stations");
        addLines(elementsL);
        addStations(elementsS);
-       for(Lines line : lines){
+       for(Line line : lines){
            System.out.println(line.getNumber() + " - " + line.getName());
        }
        for (Stations station : stations) {
@@ -98,7 +99,7 @@ public class Main {
 
     public static void addLines(Elements elements){
         lines = new ArrayList<>();
-        elements.forEach(line -> lines.add(new Lines(line.attr("data-line"), line.text())));
+        elements.forEach(line -> lines.add(new Line(line.attr("data-line"), line.text())));
     }
 
 
@@ -123,6 +124,19 @@ public class Main {
             }
         }
 
+    }
+
+
+     public static String parsefile(String path) {
+        StringBuilder builder = new StringBuilder();
+
+        try {
+            List<String> lines = Files.readAllLines(Paths.get(path));
+            lines.forEach(line -> builder.append(line + "\n"));
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return builder.toString();
     }
 
 

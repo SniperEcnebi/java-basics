@@ -1,3 +1,4 @@
+import core.Station;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -20,7 +21,7 @@ public class JsonParser {
             JSONObject jsonObject = jsonArray.getJSONObject(i);
             String name = jsonObject.getString("station_name");
             String depth = jsonObject.getString("depth");
-            Station station = new Station(name, depth);
+            Station station = new Station(name,"", depth);
             stations.add(station);
         }
 
@@ -41,19 +42,7 @@ public class JsonParser {
         return content;
     }
 
-    private static class Station {
-        private String name;
-        private String depth;
 
-        public Station(String name, String depth) {
-            this.name = name;
-            this.depth = depth;
-        }
 
-        @Override
-        public String toString() {
-            return "name='" + name + '\'' +
-                    ", depth='" + depth + '\'';
-        }
-    }
+
 }

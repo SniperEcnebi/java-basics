@@ -6,6 +6,7 @@ public class Station {
     private String depth;
     private String line;
 
+
     public Station(String name, String date, String depth) {
         this.name = name;
         this.date = date;
@@ -44,5 +45,13 @@ public class Station {
     public void setLine(String line) {
         this.line = line;
     }
+
+
+
+    @Override
+    public String toString() {
+        return "name='" + name + '\'' +
+               ", depth='" + depth + '\'';
+        }
 
 }

@@ -1,4 +1,3 @@
-
 import core.Line;
 import core.Stations;
 import org.jsoup.Jsoup;
@@ -48,21 +47,18 @@ public class Main {
        addLines(elementsL);
        addStations(elementsS);
        for(Line line : lines){
-           System.out.println(line.getNumber() + " - " + line.getName());
+           System.out.println(line.getName() + " - " + line.getNumber());
        }
        for (Stations station : stations) {
            System.out.println("Линия: " + station.getLine() + ", станции: " + station.getName());
        }
 
        JsonParser js = new JsonParser();
-
-
        for(File i : fileListJson){
            js.JsonPathandParse(i.getAbsolutePath());
        }
 
-       JsonLinesWriter jsonLinesWriter = new JsonLinesWriter();
-       jsonLinesWriter.jlw("https://skillbox-java.github.io/");
+
 
 
 
@@ -80,14 +76,9 @@ public class Main {
 
        }
 
-       JsonAndCsvParser jsonAndCsvParser = new JsonAndCsvParser();
-       jsonAndCsvParser.recursiv(rootFile);
-
-       HtmlParser htmlParser = new HtmlParser("FilesAndNetwork/data/code.html");
-       htmlParser.getStationList();
-       htmlParser.getLineList();
-       htmlParser.createHasConnection();
-       htmlParser.writeToJson();
+       JsonLinesWriter jsonLinesWriter = new JsonLinesWriter();
+       jsonLinesWriter.linesWriter(PATH_TO_CREATE_FILE + "metro.json");
+       
        
 
     }

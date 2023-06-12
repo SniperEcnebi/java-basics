@@ -53,9 +53,9 @@ public class Main {
            System.out.println("Линия: " + station.getLine() + ", станции: " + station.getName());
        }
 
-       JsonParser js = new JsonParser();
+
        for(File i : fileListJson){
-           js.JsonPathandParse(i.getAbsolutePath());
+           JsonParser.JsonPathandParse(i.getAbsolutePath());
        }
 
 
@@ -76,9 +76,9 @@ public class Main {
 
        }
 
+
        JsonLinesWriter jsonLinesWriter = new JsonLinesWriter();
-       jsonLinesWriter.linesWriter(PATH_TO_CREATE_FILE + "metro.json");
-       
+       jsonLinesWriter.toJson(PATH_TO_CREATE_FILE + "File1.json");
        
 
     }
@@ -94,7 +94,7 @@ public class Main {
     }
 
 
-    private static void search(File rootFile, List<File> fileListJson, List<File> fileListCsv){
+    public static void search(File rootFile, List<File> fileListJson, List<File> fileListCsv){
         if (rootFile.isDirectory()) {
             File[] allFiles = rootFile.listFiles();
             if (allFiles != null) {

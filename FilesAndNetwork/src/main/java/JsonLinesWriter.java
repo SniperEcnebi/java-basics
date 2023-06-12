@@ -1,54 +1,54 @@
-
-import core.Stations;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-import org.jsoup.nodes.Document;
-
-import java.util.List;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
 
 public class JsonLinesWriter {
 
-    static JSONObject connections = new JSONObject();
-    static List<Stations> Stations;
+    public static void toJson(String path) {
+        linesWriter(path);
+    }
 
-    public static void linesWriter(String path){
+    public static void linesWriter(String path) {
         JSONObject json = new JSONObject();
-
         JSONObject stations = new JSONObject();
-
-
-
-
-
+        JSONArray connections = new JSONArray();
 
         try {
-            Document doc = Jsoup.connect("https://skillbox-java.github.io/").maxBodySize(0).get();
-            Elements linesList = doc.select("div.js-metro-stations");
-            Elements conStations = doc.select(".t-icon-metroln");
-            addStations(conStations);
-            for (int i = 0; i < linesList.size(); i++) {
-                Element line = linesList.get(i);
+            Document doc = Jsoup.connect("https://skillbox-java.github.io/").get();
+            Elements lines = doc.select(".js-metro-stations");
+
+            for (Element line : lines) {
                 String lineName = line.attr("data-line");
-                Elements stationsList = line.select("p");
-                JSONArray lineStations = new JSONArray();
-                for (Element station : stationsList) {
-                    lineStations.put(station.text());
+                Elements stationElements = line.select("p");
+
+                JSONArray stationNames = new JSONArray();
+                for (Element stationElement : stationElements) {
+                    String stationName = stationElement.text();
+                    stationNames.put(stationName);
+
+                    Elements connectedStations = stationElement.select("span.t-icon-metroln");
+                    for (Element connectedStation : connectedStations) {
+                        String connectedStationName = connectedStation.previousElementSibling().text();
+                        if (!connectedStationName.isEmpty()) {
+                            JSONObject connection = new JSONObject();
+                            connection.put("line", lineName);
+                            connection.put("station", connectedStationName);
+                            connections.put(connection);
+                        }
+                    }
                 }
-                stations.put(lineName, lineStations);
+
+                stations.put(lineName, stationNames);
             }
 
-
-
             json.put("stations", stations);
-            json.put("connections", Stations);
-
+            json.put("connections", connections);
 
             FileWriter fileWriter = new FileWriter(path);
             fileWriter.write(json.toString(4));
@@ -60,14 +60,5 @@ public class JsonLinesWriter {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-
     }
-
-    public static void addStations(Elements elements){
-        Stations = new ArrayList<>();
-        elements.forEach(st -> Stations.add(new Stations(st.attr("title"), st.attr("data-line"))));
-
-    }
-
 }

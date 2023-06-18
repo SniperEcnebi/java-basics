@@ -23,11 +23,13 @@ public class JSON {
         String url = "https://skillbox-java.github.io/";
         String fileName = PATH_TO_CREATE_FILE + "stations.json";
         String jsonFilePath1 = "C:/Users/Amirkhan/Downloads/stations-data (1)/data/2/4/depths-1.json";
-        String jsonFilePath2 = "C:/Users/Amirkhan/Downloads/stations-data (1)/data/4/6/depths-3.json";
-        String jsonFilePath3 = "C:/Users/Amirkhan/Downloads/stations-data (1)/data/7/1/depths-2.json";
-        String csvFilePath1 = "C:/Users/Amirkhan/Downloads/stations-data (1)/data/0/5/dates-2.csv";
-        String csvFilePath2 = "C:/Users/Amirkhan/Downloads/stations-data (1)/data/4/6/dates-1.csv";
+        String jsonFilePath2 = "C:/Users/Amirkhan/Downloads/stations-data (1)/data/7/1/depths-2.json";
+        String jsonFilePath3 = "C:/Users/Amirkhan/Downloads/stations-data (1)/data/4/6/depths-3.json";
+        String csvFilePath1 = "C:/Users/Amirkhan/Downloads/stations-data (1)/data/4/6/dates-1.csv";
+        String csvFilePath2 = "C:/Users/Amirkhan/Downloads/stations-data (1)/data/0/5/dates-2.csv";
         String csvFilePath3 = "C:/Users/Amirkhan/Downloads/stations-data (1)/data/9/6/dates-3.csv";
+
+
 
         collectStationData(url, fileName, new String[]{jsonFilePath1, jsonFilePath2, jsonFilePath3}, new String[]{csvFilePath1, csvFilePath2, csvFilePath3});
     }
@@ -44,17 +46,17 @@ public class JSON {
             Map<String, String> stationDateMap = readStationDates(csvFilePaths);
 
             for (Element stationElement : stationElements) {
-                String stationName = stationElement.text().substring(3); // Убираем первую цифру и точку
-                String lineName = stationElement.parent().attr("data-line");
+                String stationName = stationElement.text().substring(3).trim();
+                String lineNum = stationElement.parent().attr("data-line");
                 String depth = stationDepthMap.get(stationName);
                 String date = stationDateMap.get(stationName);
                 boolean hasConnection = !stationElement.select(".t-icon-metroln").isEmpty();
 
                 JSONObject stationObject = new JSONObject();
                 stationObject.put("name", stationName);
-                stationObject.put("line", lineName);
-                stationObject.put("depth", depth != null ? depth : JSONObject.NULL);
-                stationObject.put("date", date != null ? date : JSONObject.NULL);
+                stationObject.put("line", lineNum);
+                stationObject.put("depth", depth != null ? depth : "");
+                stationObject.put("date", date != null ? date : "");
                 stationObject.put("hasConnection", hasConnection);
 
                 stationsArray.put(stationObject);
